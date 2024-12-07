@@ -6,10 +6,10 @@ local panel = screenGui:WaitForChild("Panel")
 local toggleButton = screenGui:WaitForChild("ToggleButton")
 local hitboxButton = panel:WaitForChild("HitboxButton")
 
--- Objeto-alvo no Workspace
-local targetPart = workspace:WaitForChild("Ball")
-local originalSize = targetPart.Size
-local hitboxEnabled = false
+-- Objeto alvo no Workspace
+local targetPart = workspace:WaitForChild("Ball") -- Substitua "Ball" pelo nome do objeto que deseja
+local originalSize = targetPart.Size -- Salva o tamanho original
+local hitboxEnabled = false -- Estado inicial do hitbox
 
 -- Inicialmente, o painel está oculto
 panel.Visible = false
@@ -19,21 +19,23 @@ local function togglePanel()
     panel.Visible = not panel.Visible
 end
 
--- Função para alterar o hitbox
+-- Função para alterar a hitbox
 local function toggleHitbox()
     if hitboxEnabled then
+        -- Restaurar o tamanho original da hitbox
         targetPart.Size = originalSize
         targetPart.Transparency = 0
         hitboxEnabled = false
-        print("Hitbox desativado.")
+        print("Hitbox desativado. Tamanho normal.")
     else
-        targetPart.Size = originalSize * Vector3.new(3, 3, 3)
-        targetPart.Transparency = 0.5
+        -- Aumentar o tamanho da hitbox
+        targetPart.Size = originalSize * Vector3.new(10, 10, 10) -- Aumenta o tamanho da hitbox
+        targetPart.Transparency = 0.5 -- Deixa o objeto um pouco transparente para ver a alteração
         hitboxEnabled = true
-        print("Hitbox ativado.")
+        print("Hitbox ativado. Tamanho aumentado.")
     end
 end
 
--- Conecta os botões às funções
-toggleButton.MouseButton1Click:Connect(togglePanel)
-hitboxButton.MouseButton1Click:Connect(toggleHitbox)
+-- Conectar os botões às funções
+toggleButton.MouseButton1Click:Connect(togglePanel) -- Abre/fecha o painel
+hitboxButton.MouseButton1Click:Connect(toggleHitbox) -- Altera o tamanho do hitbox
