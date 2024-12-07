@@ -1,15 +1,15 @@
 -- Configurações iniciais
 local player = game.Players.LocalPlayer
 local gui = player:WaitForChild("PlayerGui")
-local screenGui = gui:WaitForChild("ScreenGui") -- Substitua pelo nome real da ScreenGui
-local panel = screenGui:WaitForChild("Panel") -- Nome do painel (Frame)
-local toggleButton = screenGui:WaitForChild("ToggleButton") -- Botão de abrir/fechar
-local hitboxButton = panel:WaitForChild("HitboxButton") -- Botão de alterar hitbox
+local screenGui = gui:WaitForChild("ScreenGui")
+local panel = screenGui:WaitForChild("Panel")
+local toggleButton = screenGui:WaitForChild("ToggleButton")
+local hitboxButton = panel:WaitForChild("HitboxButton")
 
 -- Objeto-alvo no Workspace
-local targetPart = workspace:WaitForChild("Ball") -- Substitua "Ball" pelo nome do objeto
-local originalSize = targetPart.Size -- Salva o tamanho original
-local hitboxEnabled = false -- Estado inicial do hitbox
+local targetPart = workspace:WaitForChild("Ball")
+local originalSize = targetPart.Size
+local hitboxEnabled = false
 
 -- Inicialmente, o painel está oculto
 panel.Visible = false
@@ -22,15 +22,13 @@ end
 -- Função para alterar o hitbox
 local function toggleHitbox()
     if hitboxEnabled then
-        -- Restaurar o hitbox original
         targetPart.Size = originalSize
-        targetPart.Transparency = 0 -- Restaura a transparência original
+        targetPart.Transparency = 0
         hitboxEnabled = false
         print("Hitbox desativado.")
     else
-        -- Aumentar o hitbox
-        targetPart.Size = originalSize * Vector3.new(3, 3, 3) -- Aumenta o tamanho
-        targetPart.Transparency = 0.5 -- Deixa visível para testes
+        targetPart.Size = originalSize * Vector3.new(3, 3, 3)
+        targetPart.Transparency = 0.5
         hitboxEnabled = true
         print("Hitbox ativado.")
     end
